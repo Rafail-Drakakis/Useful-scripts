@@ -1,2 +1,2 @@
 # Useful-scripts
-A repository with useful scripts for Ubuntu users
+A repository with useful scripts for linux users
