@@ -25,4 +25,4 @@ echo "MAKEFLAGS= \"-J$(nproc)\"" # This command sets the number of jobs make can
 sudo apt-get update -y # Update the system
 sudo apt-get upgrade -y # Upgrade the system
 sudo apt-get dist-upgrade -y # Upgrade the distribution
-
+sudo reboot #reboot the system
