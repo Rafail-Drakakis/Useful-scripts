@@ -11,7 +11,7 @@ rm google-chrome-stable_current_amd64.deb #remove the file
 
 # Install software
 sudo apt install software-properties-common apt-transport-https filezilla copyq wget clang-format-11 python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg yt-dlp jupyter tesseract-ocr snapd -y
-sudo snap install notepad-plus-plus code sublime-text -y
+sudo snap install notepad-plus-plus code -y
 
 #Install python libraries
 pip install numpy pandas matplotlib requests beautifulsoup4 pygame pytube openpyxl pytesseract Pillow pydub sklearn shutil itertools time random sys re docx urllib moviepy pdf2docx PyPDF2 pdf2image pathlib
