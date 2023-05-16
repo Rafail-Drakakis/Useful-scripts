@@ -14,7 +14,7 @@ sudo apt install software-properties-common apt-transport-https filezilla copyq 
 sudo snap install notepad-plus-plus code -y
 
 #Install python libraries
-pip install numpy pandas matplotlib requests beautifulsoup4 pygame pytube openpyxl pytesseract Pillow pydub sklearn shutil itertools time random sys re docx urllib moviepy pdf2docx PyPDF2 pdf2image pathlib
+pip install numpy pandas matplotlib requests beautifulsoup4 pygame pytube openpyxl pytesseract Pillow pydub shutil itertools time random sys re docx urllib moviepy pdf2docx PyPDF2 pdf2image pathlib
 
 # Set up aliases for frequently used commands
 echo "alias jupyter='jupyter notebook'" >> ~/.bashrc # Enter jupyter instead of jupyter notebook
