@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #Ubuntu logistics
-gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true #Move the "show applications key to the right"
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM # Move taskbar to bottom
+gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true #Move the "show applications key to the right"
 sudo apt install gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer -y # Install gnome-tweaks and microsoft fonts
 
 #Install sublime-text
