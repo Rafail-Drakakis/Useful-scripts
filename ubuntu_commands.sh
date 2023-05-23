@@ -20,7 +20,7 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb #install google chrome
 rm google-chrome-stable_current_amd64.deb #remove the file
 
 # Install software
-sudo apt install software-properties-common apt-transport-https filezilla copyq wget clang-format-11 python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg yt-dlp jupyter tesseract-ocr snapd -y
+sudo apt install software-properties-common apt-transport-https filezilla copyq wget clang-format-11 python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg yt-dlp jupyter tesseract-ocr snapd gnome-sound-recorder -y
 sudo snap install notepad-plus-plus code -y
 
 # Install python libraries
@@ -37,4 +37,4 @@ echo "MAKEFLAGS= \"-J$(nproc)\"" # This command sets the number of jobs make can
 sudo apt-get update -y # Update the system
 sudo apt-get upgrade -y # Upgrade the system
 sudo apt-get dist-upgrade -y # Upgrade the distribution
-#sudo reboot # Reboot the system
+sudo reboot # Reboot the system
