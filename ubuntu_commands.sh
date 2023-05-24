@@ -2,6 +2,7 @@
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM # Move taskbar to bottom
 gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true # Move the "show applications" button to the right
 sudo apt install gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer -y # Install gnome-tweaks and microsoft fonts
+wget https://sourceforge.net/projects/orthos-spell/files/v.0.4.0./orthos-el_GR-0.4.0-87.oxt/download -O orthos.oxt # Install orthos.oxt, a Greek dictionary for Libre Office
 
 # Install sublime-text
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null # Import Sublime Text GPG key
