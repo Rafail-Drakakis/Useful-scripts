@@ -14,6 +14,7 @@ sudo apt install software-properties-common apt-transport-https copyq wget pytho
 
 # Set up aliases for frequently used commands
 echo "MAKEFLAGS= \"-J$(nproc)\"" # This command sets the number of jobs make can run simultaneously
+
 echo "alias update='sudo apt-get update -y'" >> ~/.bashrc # Type "update" instead of "sudo apt-get update -y"
 echo "alias upgrade='sudo apt-get upgrade -y'" >> ~/.bashrc # Type "upgrade" instead of "sudo apt-get upgrade -y"
 echo "alias youtube downloader='python youtube_downloader.py'" # Type "youtube downloader" instead of "python youtube_downloader.py"
