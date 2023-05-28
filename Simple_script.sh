@@ -2,7 +2,7 @@
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM # Move taskbar to bottom
 gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true # Move the "show applications key to the right"
 sudo apt install gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer -y # Install gnome-tweaks and microsoft fonts
-wget https://sourceforge.net/projects/orthos-spell/files/v.0.4.0./orthos-el_GR-0.4.0-87.oxt/download -O orthos.oxt # Install orthos.oxt, a Greek dictionary for Libre Office
+wget https://sourceforge.net/projects/orthos-spell/files/v.0.4.0./orthos-el_GR-0.4.0-87.oxt # Install orthos.oxt, a Greek dictionary for Libre Office
 
 # Install Google Chrome 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb # Download the .deb file
