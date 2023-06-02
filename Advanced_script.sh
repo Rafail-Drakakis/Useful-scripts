@@ -32,6 +32,7 @@ echo "alias jupyter='jupyter notebook'" >> ~/.bashrc # Enter jupyter instead of 
 echo "alias google='google-chrome'" >> ~/.bashrc # Enter google instead of google-chrome
 echo "alias python='python3'" >> ~/.bashrc # Enter python instead of python3
 echo "alias pip='pip3'" >> ~/.bashrc # Enter pip instead of pip3
+echo "alias suspend='systemctl suspend'" >> ~/.bashrc
 echo "MAKEFLAGS= \"-J$(nproc)\"" # This command sets the number of jobs make can run simultaneously
 
 # Final system update
