@@ -10,20 +10,12 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 sudo apt-get update # Update package lists
 sudo apt-get install sublime-text # Install Sublime Text
 
-# Install virtualbox
-wget https://download.virtualbox.org/virtualbox/7.0.8/virtualbox-7.0_7.0.8-156879~Ubuntu~jammy_amd64.deb # Download the VirtualBox .deb file
-sudo dpkg -i virtualbox-7.0_7.0.8-156879~Ubuntu~jammy_amd64.deb # Install the virtualbox
-rm virtualbox-7.0_7.0.8-156879~Ubuntu~jammy_amd64.deb # Remove the .deb file
-
 # Install Google Chrome 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb #download the .deb file
 sudo dpkg -i google-chrome-stable_current_amd64.deb #install google chrome
 rm google-chrome-stable_current_amd64.deb #remove the file
 
-# Install viber
-wget https://download.cdn.viber.com/cdn/desktop/Linux/viber.deb
-sudo apt install ./viber.deb
-rm viber.deb
+sudo snap install --classic code #install vs code
 
 # Install software
 sudo apt install software-properties-common apt-transport-https filezilla copyq wget clang-format-11 python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg yt-dlp jupyter tesseract-ocr snapd gnome-sound-recorder -y
