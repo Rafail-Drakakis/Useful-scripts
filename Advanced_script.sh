@@ -12,7 +12,7 @@ sudo apt install gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-instal
 sudo snap install notepad-plus-plus code -y
 
 # Install python libraries
-pip install numpy pandas matplotlib requests beautifulsoup4 pygame pytube openpyxl pytesseract Pillow time random sys re docx urllib moviepy pdf2docx PyPDF2 pdf2image pathlib
+pip install pyinstaller numpy pandas matplotlib requests beautifulsoup4 pygame pytube openpyxl pytesseract Pillow time random sys re docx urllib moviepy pdf2docx PyPDF2 pdf2image pathlib
 
 # Install Google Chrome 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb #download the .deb file
@@ -22,10 +22,9 @@ rm google-chrome-stable_current_amd64.deb #remove the file
 wget https://sourceforge.net/projects/orthos-spell/files/v.0.4.0./orthos-el_GR-0.4.0-87.oxt # Download orthos.oxt, a Greek dictionary for Libre Office
 
 # Set up aliases for frequently used commands
-echo "alias google='google-chrome'" >> ~/.bashrc # Enter google instead of google-chrome
 echo "alias python='python3'" >> ~/.bashrc # Enter python instead of python3
 echo "alias pip='pip3'" >> ~/.bashrc # Enter pip instead of pip3
-echo "MAKEFLAGS= \"-J$(nproc)\"" # This command sets the number of jobs make can run simultaneously
+echo "MAKEFLAGS= \"-J$(nproc)\"" # This command configures the behavior of the make tool
 
 # Final system update
 sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
