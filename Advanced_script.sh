@@ -1,6 +1,6 @@
 # Ubuntu logistics
-gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM show-apps-at-top true # Move taskbar to bottom
-gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true # Move the "show applications" button to the right
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM' # Move taskbar to bottom
+gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true  # Move the "show applications" button to the left
 
 # sublime-text
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null # Import Sublime Text GPG key
