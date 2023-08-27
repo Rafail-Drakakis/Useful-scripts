@@ -8,11 +8,11 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 
 # Install software
 sudo add-apt-repository universe
-sudo apt install gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer sublime-text shutter software-properties-common apt-transport-https filezilla copyq wget clang-format-11 python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg yt-dlp jupyter tesseract-ocr snapd gnome-sound-recorder -y
+sudo apt install gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer sublime-text shutter software-properties-common apt-transport-https filezilla copyq wget clang-format-11 python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg jupyter tesseract-ocr snapd gnome-sound-recorder -y
 sudo snap install notepad-plus-plus code -y
 
 # Install python libraries
-pip install pyinstaller numpy pandas matplotlib requests beautifulsoup4 pygame pytube openpyxl pytesseract Pillow time random sys re docx urllib moviepy pdf2docx PyPDF2 pdf2image pathlib
+pip install pyinstaller yt-dlp numpy pandas matplotlib requests beautifulsoup4 pygame pytube openpyxl pytesseract Pillow time random sys re docx urllib moviepy pdf2docx PyPDF2 pdf2image pathlib
 
 # Install Google Chrome 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb #download the .deb file
