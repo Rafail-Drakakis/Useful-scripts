@@ -2,14 +2,13 @@
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM' # Move taskbar to bottom
 gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true  # Move the "show applications" button to the left
 
-# Install java
-sudo apt install default-jdk
-
 # Install software
 sudo add-apt-repository universe
-sudo apt install gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer sublime-text shutter software-properties-common apt-transport-https filezilla copyq wget clang-format-11 python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg jupyter tesseract-ocr snapd gnome-sound-recorder -y
-sudo snap install code --classic
-sudo snap install sublime-text --classic
+sudo apt install gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer shutter software-properties-common apt-transport-https filezilla copyq wget clang-format-11 python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg jupyter tesseract-ocr snapd gnome-sound-recorder -y
+sudo apt install default-jdk                                #install java
+sudo snap install code --classic                            #install vs code
+sudo snap install sublime-text --classic                    #install sublime-text
+sudo snap install intellij-idea-community --classic --edge  #install intellij
 
 # Install Google Chrome 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb #download the .deb file
