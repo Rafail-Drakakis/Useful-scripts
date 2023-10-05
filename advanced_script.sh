@@ -11,9 +11,9 @@ sudo snap install sublime-text --classic                    #install sublime-tex
 sudo snap install intellij-idea-community --classic --edge  #install intellij
 
 # Install Google Chrome 
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb #download the .deb file
-sudo dpkg -i google-chrome-stable_current_amd64.deb #install google chrome
-rm google-chrome-stable_current_amd64.deb #remove the file
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb   #download the .deb file
+sudo dpkg -i google-chrome-stable_current_amd64.deb                              #install google chrome
+rm google-chrome-stable_current_amd64.deb                                        #remove the file
 
 # Download orthos.oxt, a Greek dictionary for Libre Office
 wget https://sourceforge.net/projects/orthos-spell/files/v.0.4.0./orthos-el_GR-0.4.0-87.oxt 
@@ -22,6 +22,7 @@ wget https://sourceforge.net/projects/orthos-spell/files/v.0.4.0./orthos-el_GR-0
 echo "alias python='python3'" >> ~/.bashrc # Enter python instead of python3
 echo "alias pip='pip3'" >> ~/.bashrc # Enter pip instead of pip3
 echo "MAKEFLAGS= \"-J$(nproc)\"" # This command configures the behavior of the make tool
+echo "alias update='sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y'" >> ~/.bashrc
 
 # Final system update
 sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y
