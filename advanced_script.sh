@@ -9,7 +9,6 @@ sudo apt install default-jdk                                #install java
 sudo snap install code --classic                            #install vs code
 sudo snap install sublime-text --classic                    #install sublime-text
 sudo snap install intellij-idea-community --classic --edge  #install intellij
-sudo snap install clion --classic                           #install clion
 
 # Install Google Chrome 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb   #download the .deb file
