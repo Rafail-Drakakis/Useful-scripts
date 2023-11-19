@@ -18,3 +18,5 @@ cat <username>.pub #                                 # Display the public key co
 chmod u+x <file_name>               # Make the "<file_name>" file executable for the user
 sh test.sh <executable_name> ./     # Execute the script with "<executable_name>" as an argument and the current directory
 sh test.sh <executable_name> tests  # Execute the script with "<executable_name>" as an argument and the "tests" directory
+
+ssh <Registation_number>@<machine_name>.<domain_name> # Turnin command
