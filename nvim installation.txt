@@ -1,0 +1,5 @@
+First, make sure you are in your home directory (press 'cd' if you are not sure)
+1. Paste this command "git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim"
+2. Enter "ls ~/.config/nvim"
+3. Start nvim by entering "nvim" in the terminal and make sure everything is up to date
+4. Exit with ":q"
