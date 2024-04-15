@@ -7,7 +7,6 @@ sudo add-apt-repository universe
 sudo apt install gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer shutter software-properties-common apt-transport-https filezilla copyq wget clang-format-11 python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg jupyter tesseract-ocr snapd gnome-sound-recorder -y
 sudo apt install default-jdk                                #install java
 sudo snap install code --classic                            #install vs code
-sudo snap install sublime-text --classic                    #install sublime-text
 sudo snap install intellij-idea-community --classic --edge  #install intellij
 
 # Install Google Chrome 
