@@ -24,3 +24,6 @@ pdf2docx
 yt-dlp
 tabula
 pytesseract
+cv2
+folium
+rasterio
