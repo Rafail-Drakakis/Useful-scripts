@@ -1,0 +1,21 @@
+sudo nvim /etc/systemd/system/nordvpn-startup.service
+
+paste this
+"""
+[Unit]
+Description=Connect to NordVPN at startup
+After=network-online.target
+
+[Service]
+Type=oneshot
+Environment="HOME=/home/rafail"
+ExecStart=/usr/bin/nordvpn connect
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+"""
+
+sudo systemctl daemon-reload
+sudo systemctl restart nordvpn-startup.service
+sudo systemctl status nordvpn-startup.service
