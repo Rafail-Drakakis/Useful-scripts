@@ -1,42 +1,35 @@
 #!/bin/bash
 
-# Check if the script is run as root
-if [ "$(id -u)" -eq 0 ]; then
-    echo "The script is running with root privileges."
+# Define the service file path
+SERVICE_FILE="/etc/systemd/system/nordvpn-startup.service"
 
-   # Define the service file path
-   SERVICE_FILE="/etc/systemd/system/nordvpn-startup.service"
-
-   # Create and write the service file
-   cat << EOF > $SERVICE_FILE
-[Unit]
+# Prepare the content of the service file
+SERVICE_CONTENT="[Unit]
 Description=Connect to NordVPN at startup
 After=network-online.target
 
 [Service]
 Type=oneshot
-Environment="HOME=/home/rafail"
+Environment=\"HOME=/home/rafail\"
 ExecStart=/usr/bin/nordvpn connect
 RemainAfterExit=yes
 
 [Install]
-WantedBy=multi-user.target
-EOF
+WantedBy=multi-user.target"
 
-   # Reload systemd to recognize the new service
-   echo "Reloading systemd daemon..."
-   sudo systemctl daemon-reload
+# Create and write the service file using sudo for elevated privileges
+echo "$SERVICE_CONTENT" | sudo tee $SERVICE_FILE > /dev/null
 
-   # Restart the service
-   echo "Restarting nordvpn-startup.service..."
-   sudo systemctl restart nordvpn-startup.service
+# Reload systemd to recognize the new service
+echo "Reloading systemd daemon..."
+sudo systemctl daemon-reload
 
-   # Check the status of the service
-   echo "Checking the status of nordvpn-startup.service..."
-   sudo systemctl status nordvpn-startup.service
+# Restart the service
+echo "Restarting nordvpn-startup.service..."
+sudo systemctl restart nordvpn-startup.service
 
-   echo "Press ctr + c"
+# Check the status of the service
+echo "Checking the status of nordvpn-startup.service..."
+sudo systemctl status nordvpn-startup.service
 
-else
-    echo "Please run the script with sudo."
-fi
+echo "Press ctr + c"
