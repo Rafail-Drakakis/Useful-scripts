@@ -3,29 +3,24 @@
 set -e  # Stop on error
 
 # Configure GNOME Shell extensions
-echo "Configuring GNOME Shell extensions..."
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
 gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true
 
 # Add repositories and update
-echo "Adding repositories and updating system..."
 sudo add-apt-repository universe -y || true  # Continue even if repository addition fails
 sudo apt update
 sudo apt -y upgrade
 sudo apt -y full-upgrade
 
 # Download and install packages
-echo "Downloading and installing required packages..."
 wget -O orthos-el_GR-0.4.0-87.oxt "https://downloads.sourceforge.net/project/orthos-spell/v.0.4.0./orthos-el_GR-0.4.0-87.oxt"
 sudo apt install -y gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer shutter software-properties-common apt-transport-https libreoffice default-jdk filezilla copyq wget python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg jupyter-notebook tesseract-ocr snapd gnome-sound-recorder python3-venv
 
 # Install VS Code and IntelliJ IDEA
-echo "Installing Visual Studio Code and IntelliJ IDEA..."
 sudo snap install code --classic
 sudo snap install intellij-idea-community --classic --edge
 
 # Install and configure Google Chrome
-echo "Installing Google Chrome..."
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt install -f
 rm google-chrome-stable_current_amd64.deb
@@ -34,19 +29,15 @@ rm google-chrome-stable_current_amd64.deb
 VENV_PATH="$HOME/my_venv"
 
 # Create or recreate virtual environment
-echo "Creating or recreating virtual environment..."
 python3 -m venv "$VENV_PATH"
 
 # Activate the virtual environment
-echo "Activating virtual environment..."
 . "$VENV_PATH/bin/activate"
 
 # Install Python libraries
-echo "Installing Python libraries..."
 pip install torch torchvision torchaudio ffprobe PyPDF2 SpeechRecognition urllib3 matplotlib beautifulsoup4 ffmpeg tk pygame python-docx openpyxl numpy customtkinter ctkmessagebox qrcode pandas requests Pillow pdf2image moviepy pyshorteners pdf2docx yt-dlp tabula-py pytesseract opencv-python folium rasterio punctuators
 
 # Deactivate the virtual environment
-echo "Deactivating virtual environment..."
 deactivate
 
 # Define the functions to add to .bashrc
@@ -71,11 +62,9 @@ if grep -q "run_python()" ~/.bashrc && grep -q "run_pip()" ~/.bashrc; then
 else
     # Append the functions to .bashrc
     echo "$functions_to_add" >> ~/.bashrc
-    echo "Functions added to .bashrc."
 fi
 
 # Update .bashrc with new aliases and environment variables
-echo "Setting aliases and environment variables..."
 echo "export MAKEFLAGS=\"-j\$(nproc)\"" >> ~/.bashrc
 echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y'" >> ~/.bashrc
 echo "alias connect='nordvpn connect'" >> ~/.bashrc
@@ -84,7 +73,6 @@ echo "alias python='run_python'" >> ~/.bashrc
 echo "alias pip='run_pip'" >> ~/.bashrc
 
 # Install and configure neovim
-echo "Installing and configuring Neovim..."
 git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 nvim +qall  # Launches and closes Neovim to initialize configuration
 
