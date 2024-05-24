@@ -29,20 +29,38 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt install -f
 rm google-chrome-stable_current_amd64.deb
 
-# Activate Python virtual environment and install libraries
-echo "Activating Python virtual environment and installing libraries..."
-source ~/my_venv/bin/activate
-pip3 install torch torchvision torchaudio ffprobe PyPDF2 SpeechRecognition urllib3 matplotlib beautifulsoup4 ffmpeg tk pygame phonenumbers python-docx openpyxl numpy customtkinter ctkmessagebox qrcode pandas requests Pillow pdf2image moviepy pyshorteners pdf2docx yt-dlp tabula-py pytesseract opencv-python folium rasterio punctuators
-deactivate
+# Define the path to the virtual environment and check its existence
+VENV_PATH="$HOME/my_venv"
+echo "Creating utility scripts for pip and Python..."
+if [ ! -d "$VENV_PATH" ]; then
+    echo "Virtual environment directory at $VENV_PATH does not exist."
+    echo "Please check the path and try again."
+    exit 1
+fi
 
-# Set aliases and environment variables
+# Create wrapper scripts for Python and pip
+for tool_script in "pip:run_pip.sh" "python:run_python.sh"; do
+    tool=$(echo "$tool_script" | cut -d: -f1)
+    script_name=$(echo "$tool_script" | cut -d: -f2)
+    script_path="$HOME/$script_name"
+    
+    # Clear existing script file and write new contents
+    echo "source $VENV_PATH/bin/activate" > "$script_path"
+    echo "${tool}3 \"\$@\"" >> "$script_path"
+    echo "deactivate" >> "$script_path"
+    
+    chmod +x "$script_path"
+    echo "Created $script_name in $HOME"
+done
+
+# Update .bashrc with new aliases and environment variables
 echo "Setting aliases and environment variables..."
 echo "export MAKEFLAGS=\"-j\$(nproc)\"" >> ~/.bashrc
 echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y'" >> ~/.bashrc
 echo "alias connect='nordvpn connect'" >> ~/.bashrc
 echo "alias disconnect='nordvpn disconnect'" >> ~/.bashrc
-echo "alias pip='/home/rafail/run_pip.sh'" >> ~/.bashrc
-echo "alias python='/home/rafail/run_python.sh'" >> ~/.bashrc
+echo "alias pip='$HOME/run_pip.sh'" >> ~/.bashrc
+echo "alias python='$HOME/run_python.sh'" >> ~/.bashrc
 
 # Install and configure neovim
 echo "Installing and configuring Neovim..."
