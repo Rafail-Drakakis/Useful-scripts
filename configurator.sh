@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -e  # Stop on error
 
 # Configure GNOME Shell extensions
@@ -29,22 +30,6 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt install -f
 rm google-chrome-stable_current_amd64.deb
 
-# Create utility scripts for pip and Python
-echo "Creating utility scripts for pip and Python..."
-for tool_script in "pip:run_pip.sh" "python:run_python.sh"; do
-    tool=$(echo "$tool_script" | cut -d: -f1)
-    script_name=$(echo "$tool_script" | cut -d: -f2)
-    script_path="$HOME/$script_name"
-    
-    # Clear existing script file and write new contents
-    echo "source $VENV_PATH/bin/activate" > "$script_path"
-    echo "${tool}3 \"\$@\"" >> "$script_path"
-    echo "deactivate" >> "$script_path"
-    
-    chmod +x "$script_path"
-    echo "Created $script_name in $HOME"
-done
-
 # Define the path to the virtual environment
 VENV_PATH="$HOME/my_venv"
 
@@ -58,11 +43,36 @@ echo "Activating virtual environment..."
 
 # Install Python libraries
 echo "Installing Python libraries..."
-pip install torch torchvision torchaudio ffprobe PyPDF2 SpeechRecognition urllib3 matplotlib beautifulsoup4 ffmpeg tk pygame phonenumbers python-docx openpyxl numpy customtkinter ctkmessagebox qrcode pandas requests Pillow pdf2image moviepy pyshorteners pdf2docx yt-dlp tabula-py pytesseract opencv-python folium rasterio punctuators
+pip install torch torchvision torchaudio ffprobe PyPDF2 SpeechRecognition urllib3 matplotlib beautifulsoup4 ffmpeg tk pygame python-docx openpyxl numpy customtkinter ctkmessagebox qrcode pandas requests Pillow pdf2image moviepy pyshorteners pdf2docx yt-dlp tabula-py pytesseract opencv-python folium rasterio punctuators
 
 # Deactivate the virtual environment
 echo "Deactivating virtual environment..."
 deactivate
+
+# Define the functions to add to .bashrc
+functions_to_add=$(cat <<'EOF'
+run_python() {
+    source /home/rafail/my_venv/bin/activate
+    python3 "$@"
+    deactivate
+}
+
+run_pip() {
+    source /home/rafail/my_venv/bin/activate
+    pip3 "$@"
+    deactivate
+}
+EOF
+)
+
+# Check if the functions are already in .bashrc
+if grep -q "run_python()" ~/.bashrc && grep -q "run_pip()" ~/.bashrc; then
+    echo "Functions are already in .bashrc."
+else
+    # Append the functions to .bashrc
+    echo "$functions_to_add" >> ~/.bashrc
+    echo "Functions added to .bashrc."
+fi
 
 # Update .bashrc with new aliases and environment variables
 echo "Setting aliases and environment variables..."
@@ -70,8 +80,8 @@ echo "export MAKEFLAGS=\"-j\$(nproc)\"" >> ~/.bashrc
 echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y'" >> ~/.bashrc
 echo "alias connect='nordvpn connect'" >> ~/.bashrc
 echo "alias disconnect='nordvpn disconnect'" >> ~/.bashrc
-echo "alias pip='$HOME/run_pip.sh'" >> ~/.bashrc
-echo "alias python='$HOME/run_python.sh'" >> ~/.bashrc
+echo "alias python='run_python'" >> ~/.bashrc
+echo "alias pip='run_pip'" >> ~/.bashrc
 
 # Install and configure neovim
 echo "Installing and configuring Neovim..."
