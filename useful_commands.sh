@@ -1,9 +1,3 @@
-# Install Nordvpn on linux
-sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)		 # Install the app.
-sudo usermod -aG nordvpn $USER                                           # Then, reboot.
-nordvpn login									   						 # Log in to your account.
-nordvpn connect 								 						 # Connect to a server.
-
 # How to add a Gitlab account 
 ssh-keygen -t rsa -b  2048 -C "<email>"   			 # Generate ssh key and ress enter in the next three options.
 cat ~/.ssh/id_rsa.pub                                # Display the ssh key and copy the printed text. Then, add it to ssh keys in Gitlab.
