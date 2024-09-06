@@ -72,10 +72,6 @@ echo "alias disconnect='nordvpn disconnect'" >> ~/.bashrc
 echo "alias python='run_python'" >> ~/.bashrc
 echo "alias pip='run_pip'" >> ~/.bashrc
 
-# Install and configure neovim
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
-nvim +qall  # Launches and closes Neovim to initialize configuration
-
 # Prompt for reboot
 read -p "Do you want to reboot the system now? [y/N] " choice
 case "$choice" in
