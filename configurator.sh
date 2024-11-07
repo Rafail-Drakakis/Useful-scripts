@@ -15,6 +15,7 @@ sudo apt -y full-upgrade
 # Download and install packages
 wget -O orthos-el_GR-0.4.0-87.oxt "https://downloads.sourceforge.net/project/orthos-spell/v.0.4.0./orthos-el_GR-0.4.0-87.oxt"
 sudo apt install -y gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer shutter software-properties-common apt-transport-https libreoffice default-jdk filezilla copyq wget python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg jupyter-notebook tesseract-ocr snapd gnome-sound-recorder python3-venv
+sudo apt install -y texlive-full texmaker
 
 # Install VS Code and IntelliJ IDEA
 sudo snap install code --classic
@@ -53,6 +54,13 @@ run_pip() {
     pip3 "$@"
     deactivate
 }
+
+make_latex() {
+    pdflatex -interaction=nonstopmode "$1"
+    pdflatex -interaction=nonstopmode "$1"
+    pdflatex -interaction=nonstopmode "$1"
+    rm -f *.aux *.log *.out *.toc *.synctex.gz *.nav *.snm
+}
 EOF
 )
 
@@ -71,6 +79,7 @@ echo "alias connect='nordvpn connect'" >> ~/.bashrc
 echo "alias disconnect='nordvpn disconnect'" >> ~/.bashrc
 echo "alias python='run_python'" >> ~/.bashrc
 echo "alias pip='run_pip'" >> ~/.bashrc
+echo "alias latex='make_latex'" >> ~/.bashrc
 
 # Prompt for reboot
 read -p "Do you want to reboot the system now? [y/N] " choice
