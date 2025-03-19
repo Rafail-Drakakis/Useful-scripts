@@ -51,4 +51,3 @@ case $service in
     2) add_github_ssh ;;
     *) echo "Invalid option selected. Exiting."; exit 1 ;;
 esac
-

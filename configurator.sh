@@ -13,19 +13,17 @@ sudo apt -y upgrade
 sudo apt -y full-upgrade
 
 # Download and install packages
+curl -fsS https://dl.brave.com/install.sh | sh
 wget -O orthos-el_GR-0.4.0-87.oxt "https://downloads.sourceforge.net/project/orthos-spell/v.0.4.0./orthos-el_GR-0.4.0-87.oxt"
-sudo apt install -y gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer shutter software-properties-common apt-transport-https libreoffice default-jdk filezilla copyq wget python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip curl gparted vim ffmpeg jupyter-notebook tesseract-ocr snapd gnome-sound-recorder python3-venv
-sudo apt install -y texlive-full texmaker
-
-# Install VS Code and IntelliJ IDEA
+sudo apt install -y gnome-shell-extension-prefs gnome-tweaks ttf-mscorefonts-installer shutter software-properties-common apt-transport-https 
+sudo apt install -y libreoffice default-jdk filezilla wget python3 python3-pip qbittorrent g++ cmake vlc git tree htop nmap ssh screen unzip 
+sudo apt install -y curl gparted vim ffmpeg jupyter-notebook tesseract-ocr snapd gnome-sound-recorder python3-venv texlive-full texmaker
 sudo snap install code --classic
-sudo snap install intellij-idea-community --classic --edge
 
-# Install and configure Google Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt install -f
-rm google-chrome-stable_current_amd64.deb
-
+#Install latex and fonts
+sudo apt install -y texlive-latex-base texlive-latex-extra texlive-xetex texlive-fonts-recommended texlive-fonts-extra texlive-lang-greek
+sudo apt install -y texlive-science texlive-pictures texlive-lang-european lmodern fonts-linuxlibertine
+sudo apt install -y python3-pygments
 # Define the path to the virtual environment
 VENV_PATH="$HOME/my_venv"
 
@@ -36,8 +34,9 @@ python3 -m venv "$VENV_PATH"
 . "$VENV_PATH/bin/activate"
 
 # Install Python libraries
-pip install torch torchvision torchaudio ffprobe PyPDF2 SpeechRecognition urllib3 matplotlib beautifulsoup4 ffmpeg tk pygame python-docx openpyxl numpy customtkinter ctkmessagebox qrcode pandas requests Pillow pdf2image moviepy pyshorteners pdf2docx yt-dlp tabula-py pytesseract opencv-python folium rasterio punctuators
-
+pip install torch torchvision torchaudio ffprobe PyPDF2 SpeechRecognition urllib3 matplotlib beautifulsoup4 ffmpeg tk pygame python-docx 
+pip install openpyxl numpy customtkinter ctkmessagebox qrcode pandas requests Pillow pdf2image moviepy pyshorteners pdf2docx yt-dlp tabula-py 
+pip install pytesseract opencv-python folium rasterio punctuators
 # Deactivate the virtual environment
 deactivate
 
@@ -55,11 +54,14 @@ run_pip() {
     deactivate
 }
 
-make_latex() {
-    pdflatex -interaction=nonstopmode "$1"
-    pdflatex -interaction=nonstopmode "$1"
-    pdflatex -interaction=nonstopmode "$1"
-    rm -f *.aux *.log *.out *.toc *.synctex.gz *.nav *.snm
+my_latex() {
+    file=$1
+    latexmk "$file" && latexmk -c
+}
+
+my_minted_latex() {
+    file=$1
+    latexmk -shell-escape "$file" && latexmk -c
 }
 EOF
 )
@@ -79,7 +81,8 @@ echo "alias connect='nordvpn connect'" >> ~/.bashrc
 echo "alias disconnect='nordvpn disconnect'" >> ~/.bashrc
 echo "alias python='run_python'" >> ~/.bashrc
 echo "alias pip='run_pip'" >> ~/.bashrc
-echo "alias latex='make_latex'" >> ~/.bashrc
+echo "alias latex='my_latex'" >> ~/.bashrc
+echo "alias latex_minted='my_minted_latex'" >> ~/.bashrc
 
 # Prompt for reboot
 read -p "Do you want to reboot the system now? [y/N] " choice
