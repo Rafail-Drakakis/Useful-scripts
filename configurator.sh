@@ -56,11 +56,6 @@ run_pip() {
 
 my_latex() {
     file=$1
-    latexmk "$file" && latexmk -c
-}
-
-my_minted_latex() {
-    file=$1
     latexmk -shell-escape "$file" && latexmk -c
 }
 EOF
@@ -82,7 +77,6 @@ echo "alias disconnect='nordvpn disconnect'" >> ~/.bashrc
 echo "alias python='run_python'" >> ~/.bashrc
 echo "alias pip='run_pip'" >> ~/.bashrc
 echo "alias latex='my_latex'" >> ~/.bashrc
-echo "alias latex_minted='my_minted_latex'" >> ~/.bashrc
 
 # Prompt for reboot
 read -p "Do you want to reboot the system now? [y/N] " choice
