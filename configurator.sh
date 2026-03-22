@@ -11,8 +11,6 @@
 # - Bash aliases and functions
 ################################################################################
 
-set -euo pipefail  # Stop on error, undefined vars, and pipe failures
-
 # Colors for output
 readonly RED='\033[0;31m'
 readonly GREEN='\033[0;32m'
@@ -24,8 +22,6 @@ readonly NC='\033[0m' # No Color
 readonly VENV_PATH="${VENV_PATH:-$HOME/my_venv}"
 readonly LATEXMKRC="$HOME/.latexmkrc"
 readonly BASHRC="$HOME/.bashrc"
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 # Logging functions
 log_info() {
     echo -e "${BLUE}[INFO]${NC} $1"
@@ -104,31 +100,19 @@ install_brave() {
     fi
 }
 
-# Download Orthos spell checker
-download_orthos() {
-    log_info "Downloading Orthos spell checker..."
-    
-    local orthos_file="orthos-el_GR-0.4.0-87.oxt"
-    local orthos_url="https://downloads.sourceforge.net/project/orthos-spell/v.0.4.0./${orthos_file}"
-    
-    if [ -f "$orthos_file" ]; then
-        log_warning "Orthos file already exists. Skipping download."
-        return 0
-    fi
-    
-    if wget -O "$orthos_file" "$orthos_url" 2>/dev/null; then
-        log_success "Orthos spell checker downloaded to: $orthos_file"
-    else
-        log_warning "Failed to download Orthos spell checker. Continuing..."
-    fi
-}
-
 # Install system packages
 install_packages() {
     log_info "Installing system packages..."
     
     # Update package list first
-    sudo apt-get update
+    if ! sudo apt-get update; then
+        log_error "apt-get update failed."
+        return 1
+    fi
+    
+    # Avoid interactive EULA prompt for Microsoft Core Fonts (otherwise apt can hang).
+    echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula boolean true" \
+        | sudo debconf-set-selections
     
     # Group packages logically
     local packages_essential=(
@@ -177,20 +161,10 @@ install_packages() {
         "snapd"
     )
     
+    # texlive-full already includes the common texlive-* components; keep texmaker separate.
     local packages_latex=(
         "texlive-full"
         "texmaker"
-        "texlive-latex-base"
-        "texlive-latex-extra"
-        "texlive-xetex"
-        "texlive-fonts-recommended"
-        "texlive-fonts-extra"
-        "texlive-lang-greek"
-        "texlive-science"
-        "texlive-pictures"
-        "texlive-lang-european"
-        "lmodern"
-        "fonts-linuxlibertine"
     )
     
     local packages_other=(
@@ -312,6 +286,20 @@ add_to_bashrc() {
     fi
 }
 
+# Append a single line to .bashrc if that exact line is not already present.
+# (Derived markers like "aliaspython" do not match "alias python=...", so we match the line.)
+add_to_bashrc_line() {
+    local line="$1"
+    
+    if grep -qF "$line" "$BASHRC" 2>/dev/null; then
+        return 1
+    fi
+    echo "" >> "$BASHRC"
+    echo "# Added by configurator.sh - $line" >> "$BASHRC"
+    echo "$line" >> "$BASHRC"
+    return 0
+}
+
 # Configure bash aliases and functions
 configure_bash() {
     log_info "Configuring bash aliases and functions..."
@@ -363,13 +351,13 @@ EOF
     
     local added_count=0
     for alias_line in "${aliases[@]}"; do
-        local marker=$(echo "$alias_line" | cut -d'=' -f1 | tr -d ' ')
-        if add_to_bashrc "$marker" "$alias_line"; then
-            ((added_count++))
+        if add_to_bashrc_line "$alias_line"; then
+            # With set -e, use pre-increment: ((x++)) exits 1 when x is 0 (expression value 0).
+            ((++added_count))
         fi
     done
     
-    if [ $added_count -gt 0 ]; then
+    if [ "${added_count:-0}" -gt 0 ]; then
         log_success "Added $added_count new entries to .bashrc"
     else
         log_info ".bashrc already contains all aliases and exports."
@@ -407,8 +395,7 @@ main() {
     configure_gnome
     add_repositories
     install_brave || true  # Non-critical
-    download_orthos || true  # Non-critical
-    install_packages
+    install_packages || exit 1
     configure_latexmk
     setup_python_venv
     configure_bash
